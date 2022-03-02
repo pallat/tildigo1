@@ -1,83 +1,40 @@
 package foobar_test
 
 import (
+	"fmt"
 	"testing"
 
 	"gitlab.com/cjexpress/tildi/signac/learngo/foobar"
 )
 
-func TestFooBarGiven1WantsString1(t *testing.T) {
-	given := 1
-	wants := "1"
-
-	get := foobar.Say(given)
-
-	if wants != get {
-		t.Errorf("given %d wants %q but got %q\n", given, wants, get)
+func TestFooBar(t *testing.T) {
+	givenWant := map[int]string{
+		1:  "1",
+		2:  "2",
+		4:  "4",
+		7:  "7",
+		8:  "8",
+		3:  "Foo",
+		6:  "Foo",
+		9:  "Foo",
+		12: "Foo",
+		5:  "Bar",
+		10: "Bar",
+		20: "Bar",
+		25: "Bar",
+		15: "FooBar",
+		30: "FooBar",
+		45: "FooBar",
+		60: "FooBar",
 	}
-}
 
-func TestFooBarGiven2WantsString2(t *testing.T) {
-	given := 2
-	wants := "2"
+	for given, wants := range givenWant {
+		t.Run(fmt.Sprintf("given %d wants %q", given, wants), func(t *testing.T) {
+			get := foobar.Say(given)
 
-	get := foobar.Say(given)
-
-	if wants != get {
-		t.Errorf("given %d wants %q but got %q\n", given, wants, get)
-	}
-}
-
-func TestFooBarGiven3WantsStringFoo(t *testing.T) {
-	given := 3
-	wants := "Foo"
-
-	get := foobar.Say(given)
-
-	if wants != get {
-		t.Errorf("given %d wants %q but got %q\n", given, wants, get)
-	}
-}
-
-func TestFooBarGiven4WantsString4(t *testing.T) {
-	given := 4
-	wants := "4"
-
-	get := foobar.Say(given)
-
-	if wants != get {
-		t.Errorf("given %d wants %q but got %q\n", given, wants, get)
-	}
-}
-
-func TestFooBarGiven5WantsStringBar(t *testing.T) {
-	given := 5
-	wants := "Bar"
-
-	get := foobar.Say(given)
-
-	if wants != get {
-		t.Errorf("given %d wants %q but got %q\n", given, wants, get)
-	}
-}
-
-func TestFooBarGiven6WantsStringFoo(t *testing.T) {
-	given := 6
-	wants := "Foo"
-
-	get := foobar.Say(given)
-
-	if wants != get {
-		t.Errorf("given %d wants %q but got %q\n", given, wants, get)
-	}
-}
-func TestFooBarGiven9WantsStringFoo(t *testing.T) {
-	given := 9
-	wants := "Foo"
-
-	get := foobar.Say(given)
-
-	if wants != get {
-		t.Errorf("given %d wants %q but got %q\n", given, wants, get)
+			if wants != get {
+				t.Errorf("given %d wants %q but got %q\n", given, wants, get)
+			}
+		})
 	}
 }
