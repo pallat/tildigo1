@@ -7,6 +7,10 @@ func Say(n int) string {
 		return "Bar"
 	}
 
+	if n == 9 {
+		return "Foo"
+	}
+
 	if n == 6 {
 		return "Foo"
 	}
