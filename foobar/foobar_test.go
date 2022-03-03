@@ -38,3 +38,29 @@ func TestFooBar(t *testing.T) {
 		})
 	}
 }
+
+type fakeIntner struct {
+	count  int
+	series []int
+}
+
+func (f *fakeIntner) Intn(n int) int {
+	defer func() { f.count++ }()
+
+	return f.series[f.count]
+}
+
+func TestRandomSay(t *testing.T) {
+	given := &fakeIntner{
+		count:  0,
+		series: []int{0, 1, 2, 4},
+	}
+
+	wants := "1-2-Foo-Bar"
+
+	get := foobar.RandomSay(given)
+
+	if wants != get {
+		t.Errorf("given %d as Intn returns value want %q but got %q\n", given, wants, get)
+	}
+}
